@@ -16,6 +16,14 @@ const App = () => {
       })
   },[pageNumber])
 
+  const goToPrevious = ()=>{
+    setPageNumber(Math.max(1,pageNumber - 1));
+  };
+
+  const goToNext = ()=>{
+    setPageNumber(Math.min(numberOfPages, pageNumber + 1));
+  };
+
   return (
     <div className="App">
       <h3>Page of {pageNumber}</h3>
@@ -27,9 +35,11 @@ const App = () => {
             <p>{post.text}</p>
             </div>
         ))}
+        <button onClick={goToPrevious}>Previous</button>
         {pages.map((pageIndex)=>(
-          <button onClick={()=>setPageNumber(pageIndex+1)}>{pageIndex +1}</button>
+          <button key={pageIndex} onClick={()=>setPageNumber(pageIndex+1)}>{pageIndex +1}</button>
         ))}
+        <button onClick={goToNext}>Next</button>
 
       </div>
   )
